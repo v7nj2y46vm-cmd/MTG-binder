@@ -301,12 +301,17 @@
     </main>
 
     <!-- Card Inspector Modal -->
-    <div id="card-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div id="modal-container" class="bg-gray-900 border border-gray-800 max-w-4xl w-full rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 scale-90 transition-transform duration-300">
+    <div id="card-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-start sm:items-center justify-center p-3 sm:p-4 overflow-y-auto hidden opacity-0 transition-opacity duration-300">
+        <div id="modal-container" class="bg-gray-900 border border-gray-800 max-w-4xl w-full rounded-2xl shadow-2xl overflow-y-auto max-h-[90dvh] my-auto grid grid-cols-1 md:grid-cols-12 scale-90 transition-transform duration-300 relative">
+
+            <!-- Floating Close Button for Mobile & Desktop -->
+            <button id="modal-close" class="absolute top-3 right-3 z-20 p-2 text-gray-400 hover:text-white bg-gray-800/80 hover:bg-gray-700 rounded-full transition-colors border border-gray-700/50 shadow-md">
+                ✕
+            </button>
 
             <!-- Card Artwork -->
-            <div class="md:col-span-5 bg-black/50 p-6 flex flex-col justify-center items-center relative min-h-[400px]">
-                <div class="w-full max-w-[280px] aspect-[2.5/3.5] relative rounded-xl shadow-2xl overflow-hidden border border-gray-800 bg-gray-900">
+            <div class="md:col-span-5 bg-black/50 p-4 sm:p-6 flex flex-col justify-center items-center relative min-h-[240px] sm:min-h-[360px]">
+                <div class="w-full max-w-[200px] sm:max-w-[280px] aspect-[2.5/3.5] relative rounded-xl shadow-2xl overflow-hidden border border-gray-800 bg-gray-900">
                     <div id="modal-loading-card" class="absolute inset-0 flex items-center justify-center bg-gray-950 text-amber-400">
                         <div class="flex flex-col items-center gap-3">
                             <div class="w-10 h-10 border-4 border-t-amber-500 border-amber-950 rounded-full animate-spin"></div>
@@ -318,19 +323,16 @@
             </div>
 
             <!-- Card Details & Market Prices -->
-            <div class="md:col-span-7 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-b from-gray-900 to-gray-950">
+            <div class="md:col-span-7 p-4 sm:p-6 md:p-8 flex flex-col justify-between bg-gradient-to-b from-gray-900 to-gray-950">
                 <div>
-                    <div class="flex justify-between items-start gap-4 mb-4">
+                    <div class="flex justify-between items-start gap-4 mb-3 pr-8 md:pr-0">
                         <div>
-                            <h3 id="modal-card-name" class="text-2xl font-bold fantasy-title text-amber-300 leading-tight">Card Name</h3>
-                            <p id="modal-card-subtitle" class="text-sm text-cyan-400 mt-1">Reprint details</p>
+                            <h3 id="modal-card-name" class="text-xl sm:text-2xl font-bold fantasy-title text-amber-300 leading-tight">Card Name</h3>
+                            <p id="modal-card-subtitle" class="text-xs sm:text-sm text-cyan-400 mt-0.5">Reprint details</p>
                         </div>
-                        <button id="modal-close" class="p-2 text-gray-500 hover:text-white bg-gray-800/40 rounded-full hover:bg-gray-800 transition-colors">
-                            ✕
-                        </button>
                     </div>
 
-                    <div class="space-y-4 my-6">
+                    <div class="space-y-4 my-4 sm:my-6">
                         <div class="grid grid-cols-2 gap-3 text-xs bg-black/30 p-3 rounded-xl border border-gray-850">
                             <div>
                                 <span class="text-gray-500 uppercase font-semibold">Collector Number</span>
@@ -531,10 +533,8 @@
             { id: 285, name: "Unrevealed Book Cover #285", set: "hob", num: "285", rarity: "Rare" }
         ];
 
-        // 25 Dragon Hoard Frame cards in surge foil (#251 to #275)
+        // 25 Dragon Hoard Frame cards in surge foil (#253 to #277)
         const DRAGON_CARDS = [
-            { id: 251, name: "Unrevealed Dragon Hoard #251", set: "hob", num: "251", rarity: "Rare" },
-            { id: 252, name: "Unrevealed Dragon Hoard #252", set: "hob", num: "252", rarity: "Rare" },
             { id: 253, name: "The Queen of Dale", set: "hob", num: "253", rarity: "Mythic" },
             { id: 254, name: "Bilbo, Luckwearer // Burglar's Plot", set: "hob", num: "254", rarity: "Mythic" },
             { id: 255, name: "Bilbo, Thief in the Night", set: "hob", num: "255", rarity: "Mythic" },
@@ -557,7 +557,9 @@
             { id: 272, name: "Unrevealed Dragon Hoard #272", set: "hob", num: "272", rarity: "Rare" },
             { id: 273, name: "Sting, Bilbo's Sword", set: "hob", num: "273", rarity: "Rare" },
             { id: 274, name: "Unrevealed Dragon Hoard #274", set: "hob", num: "274", rarity: "Rare" },
-            { id: 275, name: "Unrevealed Dragon Hoard #275", set: "hob", num: "275", rarity: "Rare" }
+            { id: 275, name: "Unrevealed Dragon Hoard #275", set: "hob", num: "275", rarity: "Rare" },
+            { id: 276, name: "Unrevealed Dragon Hoard #276", set: "hob", num: "276", rarity: "Rare" },
+            { id: 277, name: "Unrevealed Dragon Hoard #277", set: "hob", num: "277a", rarity: "Rare" }
         ];
 
         // Dynamic Live Database-Driven Grails List
