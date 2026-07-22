@@ -95,7 +95,7 @@
                     </div>
 
                     <!-- Poster Art Progress -->
-                    <div class="pt-2 border-t border-gray-800/60">
+                    <div id="stat-row-poster" class="pt-2 border-t border-gray-800/60">
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Poster Art (Traditional Foil)</span>
                             <span id="txt-poster-progress" class="font-medium text-amber-300">0/20</span>
@@ -106,7 +106,7 @@
                     </div>
 
                     <!-- Ring Showcase Progress -->
-                    <div class="pt-2">
+                    <div id="stat-row-realms" class="pt-2">
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Ring Showcase (Surge Foil)</span>
                             <span id="txt-realms-progress" class="font-medium text-cyan-400">0/30</span>
@@ -117,7 +117,7 @@
                     </div>
 
                     <!-- Book Cover Progress -->
-                    <div class="pt-2">
+                    <div id="stat-row-bookcover" class="pt-2">
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Book Cover (Surge Foil)</span>
                             <span id="txt-bookcover-progress" class="font-medium text-emerald-400">0/10</span>
@@ -128,7 +128,7 @@
                     </div>
 
                     <!-- Dragon Hoard Progress -->
-                    <div class="pt-2">
+                    <div id="stat-row-dragon" class="pt-2">
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Dragon Hoard (Surge Foil)</span>
                             <span id="txt-dragon-progress" class="font-medium text-orange-400">0/25</span>
@@ -139,7 +139,7 @@
                     </div>
 
                     <!-- Grails Progress -->
-                    <div class="pt-2 border-t border-gray-800/60">
+                    <div id="stat-row-grails" class="pt-2 border-t border-gray-800/60">
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>👑 Vault Grails Progress</span>
                             <span id="txt-grails-progress" class="font-medium text-purple-400">0/0</span>
@@ -740,12 +740,27 @@
                 grails: document.getElementById('tab-grails')
             };
 
+            const statRows = {
+                poster: document.getElementById('stat-row-poster'),
+                realms: document.getElementById('stat-row-realms'),
+                bookcover: document.getElementById('stat-row-bookcover'),
+                dragon: document.getElementById('stat-row-dragon'),
+                grails: document.getElementById('stat-row-grails')
+            };
+
             Object.keys(tabs).forEach(sec => {
                 if (tabs[sec]) {
                     if (visible.includes(sec)) {
                         tabs[sec].style.display = 'flex';
                     } else {
                         tabs[sec].style.display = 'none';
+                    }
+                }
+                if (statRows[sec]) {
+                    if (visible.includes(sec)) {
+                        statRows[sec].style.display = 'block';
+                    } else {
+                        statRows[sec].style.display = 'none';
                     }
                 }
             });
