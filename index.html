@@ -6,10 +6,9 @@
     <title>LOTR Special Edition Interactive Binder Tracker</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for premium fantasy-modern look -->
+    <!-- Google Fonts for fantasy styling -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* STREAMING_CHUNK: Setting up premium layout styles and custom scrollbars... */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0b0d12;
@@ -19,7 +18,7 @@
         .fantasy-title {
             font-family: 'Cinzel', serif;
         }
-        /* Custom scrollbar for beautiful dashboard lists */
+        /* Custom scrollbar styling */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -37,7 +36,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-    <!-- STREAMING_CHUNK: Rendering the global fantasy header... -->
     <!-- Header -->
     <header class="border-b border-gray-800/80 bg-gray-950/60 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -55,8 +53,12 @@
                 </div>
             </div>
 
-            <!-- Quick Category Switcher & Global Toolbar -->
+            <!-- Global Toolbar Controls -->
             <div class="flex flex-wrap items-center gap-2">
+                <!-- Mode Switcher (Chase vs Archive) -->
+                <button id="btn-mode-toggle" class="px-3 py-1.5 rounded-lg border border-amber-900/40 bg-amber-950/10 hover:bg-amber-900/30 transition-all flex items-center gap-2 text-sm text-amber-300">
+                    <span id="mode-toggle-icon">🎯</span> <span id="mode-toggle-text">Chase Mode</span>
+                </button>
                 <!-- Layout Grid Switcher -->
                 <button id="btn-layout-toggle" class="px-3 py-1.5 rounded-lg border border-amber-900/40 bg-amber-950/10 hover:bg-amber-900/30 transition-all flex items-center gap-2 text-sm text-amber-400">
                     <span>📐</span> <span id="layout-toggle-text">Grid: 2x2</span>
@@ -68,11 +70,10 @@
         </div>
     </header>
 
-    <!-- STREAMING_CHUNK: Organizing dynamic grid workspace containers... -->
     <!-- Main Workspace Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- Left Column: Statistics, Progress Rings, Filters & Lists (4 cols on lg) -->
+        <!-- Left Column: Statistics & Controllers (4 cols on lg) -->
         <section class="lg:col-span-4 flex flex-col gap-6">
 
             <!-- Progress & Quick-Stats Card -->
@@ -150,8 +151,7 @@
                 </div>
             </div>
 
-            <!-- STREAMING_CHUNK: Structuring selector rows to fit five sections... -->
-            <!-- Navigation & Filtering Controller -->
+            <!-- Section Selector Controller -->
             <div class="p-5 rounded-2xl border border-gray-800/80 bg-gray-900/40 backdrop-blur-md shadow-xl flex flex-col gap-4">
                 <h2 class="text-md font-bold fantasy-title tracking-wider text-amber-400 flex items-center gap-2">
                     📂 BINDER SECTION SELECTOR
@@ -226,7 +226,7 @@
                 </button>
             </div>
 
-            <!-- Quick Helper & Backup Actions -->
+            <!-- Collection Utility Actions -->
             <div class="p-5 rounded-2xl border border-gray-800/80 bg-gray-900/40 backdrop-blur-md shadow-xl flex flex-col gap-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center justify-between">
                     <span>Collection Actions</span>
@@ -241,9 +241,9 @@
                     </button>
                 </div>
 
-                <!-- iPad Backup and Restore tools -->
+                <!-- Backup and Restore tools -->
                 <div class="pt-2 border-t border-gray-800/60 flex flex-col gap-2">
-                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">iPad Backup & Transfer</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Backup & Transfer</span>
                     <div class="grid grid-cols-2 gap-2">
                         <button id="btn-export-backup" class="text-xs font-medium py-2 rounded-lg bg-indigo-950/30 border border-indigo-900/50 text-indigo-300 hover:bg-indigo-900/30 transition-all flex items-center justify-center gap-1">
                             📤 Export Save
@@ -253,10 +253,6 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="text-[10px] text-gray-400 mt-1 leading-relaxed bg-black/30 p-2.5 rounded-lg border border-gray-800/40">
-                    ℹ️ <span class="font-semibold text-gray-300">iPad Hint:</span> Use the <span class="text-indigo-400 font-semibold">Export Save</span> tool regularly. It generates a backup code you can paste into Notes to keep your safe-file immortal!
-                </div>
             </div>
 
         </section>
@@ -264,20 +260,18 @@
         <!-- Right Column: Interactive Canvas Binder View (8 cols on lg) -->
         <section class="lg:col-span-8 flex flex-col items-center gap-4">
 
-            <!-- Canvas Container Wrapper with Absolute Arrow Navigation Layers -->
             <div class="w-full relative bg-gray-950/30 rounded-3xl border border-gray-800/60 p-4 shadow-2xl flex flex-col items-center group">
 
-                <!-- Floating Left Page Navigation Arrow -->
+                <!-- Navigation Arrows -->
                 <button id="floating-arrow-prev" class="absolute left-2 md:-left-6 top-[55%] -translate-y-1/2 z-30 w-12 h-16 md:w-14 md:h-20 bg-gray-950/80 hover:bg-amber-950/90 border border-gray-800 hover:border-amber-500/50 rounded-xl flex items-center justify-center text-amber-500 text-xl font-bold shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 focus:opacity-100 disabled:opacity-0 pointer-events-auto">
                     ◀
                 </button>
 
-                <!-- Floating Right Page Navigation Arrow -->
                 <button id="floating-arrow-next" class="absolute right-2 md:-right-6 top-[55%] -translate-y-1/2 z-30 w-12 h-16 md:w-14 md:h-20 bg-gray-950/80 hover:bg-amber-950/90 border border-gray-800 hover:border-amber-500/50 rounded-xl flex items-center justify-center text-amber-500 text-xl font-bold shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 focus:opacity-100 disabled:opacity-0 pointer-events-auto">
                     ▶
                 </button>
 
-                <!-- Binder Top Bar: Title & Page Numbers -->
+                <!-- Binder Header Status Bar -->
                 <div class="w-full flex items-center justify-between mb-3 px-3 py-1 bg-black/40 rounded-xl border border-gray-800/50">
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" id="binder-status-dot"></span>
@@ -290,16 +284,15 @@
                     </div>
                 </div>
 
-                <!-- The Interactive Canvas -->
+                <!-- Interactive Binder Canvas -->
                 <div class="w-full relative flex justify-center">
                     <canvas id="binder-canvas" class="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] cursor-pointer max-w-full h-auto border border-gray-800/50 bg-stone-900/30">
                         Interactive MTG Binder
                     </canvas>
                 </div>
 
-                <!-- Custom Multi-Jump Pagination Controls below Binder Cards -->
+                <!-- Page Navigation Controls -->
                 <div id="pagination-controls" class="w-full flex flex-wrap items-center justify-center gap-1.5 mt-4 px-2 py-2.5 bg-black/40 rounded-xl border border-gray-800/40">
-                    <!-- Loaded via JavaScript dynamically -->
                 </div>
 
             </div>
@@ -307,11 +300,11 @@
         </section>
     </main>
 
-    <!-- Detailed Card Modal -->
+    <!-- Card Inspector Modal -->
     <div id="card-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div id="modal-container" class="bg-gray-900 border border-gray-800 max-w-4xl w-full rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 scale-90 transition-transform duration-300">
 
-            <!-- Left Side: Large Card Picture (5 cols) -->
+            <!-- Card Artwork -->
             <div class="md:col-span-5 bg-black/50 p-6 flex flex-col justify-center items-center relative min-h-[400px]">
                 <div class="w-full max-w-[280px] aspect-[2.5/3.5] relative rounded-xl shadow-2xl overflow-hidden border border-gray-800 bg-gray-900">
                     <div id="modal-loading-card" class="absolute inset-0 flex items-center justify-center bg-gray-950 text-amber-400">
@@ -324,10 +317,9 @@
                 </div>
             </div>
 
-            <!-- Right Side: Details, Scryfall Prices & Interaction (7 cols) -->
+            <!-- Card Details & Market Prices -->
             <div class="md:col-span-7 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-b from-gray-900 to-gray-950">
                 <div>
-                    <!-- Header -->
                     <div class="flex justify-between items-start gap-4 mb-4">
                         <div>
                             <h3 id="modal-card-name" class="text-2xl font-bold fantasy-title text-amber-300 leading-tight">Card Name</h3>
@@ -338,7 +330,6 @@
                         </button>
                     </div>
 
-                    <!-- Description and Spec Info -->
                     <div class="space-y-4 my-6">
                         <div class="grid grid-cols-2 gap-3 text-xs bg-black/30 p-3 rounded-xl border border-gray-850">
                             <div>
@@ -359,7 +350,6 @@
                             </div>
                         </div>
 
-                        <!-- Price Section (Interactive & dynamically updated) -->
                         <div class="bg-gray-950 border border-gray-850 p-4 rounded-xl flex flex-col gap-2">
                             <span class="text-xs font-bold text-amber-400 tracking-wider">LIVE MARKET PRICES (SCRYFALL)</span>
                             <div class="grid grid-cols-2 gap-4 text-center">
@@ -376,13 +366,10 @@
                     </div>
                 </div>
 
-                <!-- Footer Action Controls inside Modal -->
                 <div class="flex flex-col gap-3 pt-4 border-t border-gray-800/60">
                     <button id="modal-toggle-ownership" class="w-full py-3.5 rounded-xl font-bold text-sm tracking-wider shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
-                        <!-- Filled in JS -->
                     </button>
 
-                    <!-- Grail Delete Button (Rendered only on Grails Section) -->
                     <button id="modal-delete-grail" class="w-full py-3.5 rounded-xl font-bold text-sm tracking-wider bg-rose-950/30 border border-rose-900/60 text-rose-400 hover:bg-rose-900 hover:text-white transition-all hidden items-center justify-center gap-2">
                         🗑 REMOVE CARD FROM MY VAULT GRAILS
                     </button>
@@ -396,16 +383,13 @@
         </div>
     </div>
 
-    <!-- Backup Clipboard Text Modal Overlay -->
+    <!-- Backup Modal -->
     <div id="backup-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 max-w-md w-full p-6 rounded-2xl shadow-2xl">
             <h3 class="text-lg font-bold fantasy-title text-amber-400 mb-2" id="backup-modal-title">Backup Utility</h3>
             <p class="text-xs text-gray-400 mb-4" id="backup-modal-desc">Copy your collection state below.</p>
             <textarea id="backup-text-area" class="w-full h-32 bg-gray-950 border border-gray-800 focus:outline-none focus:border-amber-500 rounded-lg p-2.5 text-xs font-mono text-cyan-400" readonly></textarea>
-
-            <!-- In-App Notification message space to replace native browser alerts -->
             <div id="backup-notification" class="mt-2 text-xs font-semibold text-center hidden"></div>
-
             <div class="mt-4 flex gap-3">
                 <button id="btn-backup-copy" class="flex-1 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs">Copy Code</button>
                 <button id="btn-backup-close" class="px-4 py-2 rounded-lg bg-gray-850 border border-gray-800 text-gray-400 hover:text-white text-xs">Close</button>
@@ -413,7 +397,7 @@
         </div>
     </div>
 
-    <!-- Import String Modal Overlay -->
+    <!-- Import Modal -->
     <div id="import-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 max-w-md w-full p-6 rounded-2xl shadow-2xl">
             <h3 class="text-lg font-bold fantasy-title text-purple-400 mb-2">Import Collection Save</h3>
@@ -426,6 +410,47 @@
         </div>
     </div>
 
+    <!-- Magical Victory Celebration Modal Overlay -->
+    <div id="victory-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-500">
+        <div class="bg-gradient-to-b from-amber-950/80 via-gray-900 to-gray-950 border-2 border-amber-500/60 max-w-lg w-full p-8 rounded-3xl shadow-[0_0_60px_rgba(245,158,11,0.3)] text-center relative overflow-hidden transform scale-95 transition-transform duration-300">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-yellow-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-5xl mb-3 animate-bounce">🏆✨</div>
+            <h3 class="text-2xl font-black fantasy-title text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 tracking-wider mb-2">
+                A LEGENDARY FEAT ACCOMPLISHED!
+            </h3>
+            <p id="victory-modal-subtitle" class="text-sm font-semibold text-amber-300 mb-4">You have gathered all cards in this collection!</p>
+
+            <p id="victory-modal-body" class="text-xs text-gray-300 leading-relaxed bg-black/40 p-4 rounded-xl border border-amber-900/40 mb-6 font-serif italic">
+                "By the light of Eärendil and the ancient fires of Erebor, your vault shines with complete triumph!"
+            </p>
+
+            <button id="btn-victory-close" class="w-full py-3.5 rounded-xl font-bold text-sm tracking-wider bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-black shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+                ⚔️ CLAIM YOUR GLORY
+            </button>
+        </div>
+    </div>
+
+    <!-- Confirm Breaking Archive Modal Overlay -->
+    <div id="break-archive-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-900 border border-amber-600/50 max-w-md w-full p-6 rounded-2xl shadow-2xl text-center">
+            <div class="text-3xl mb-2">⚠️</div>
+            <h3 class="text-lg font-bold fantasy-title text-amber-400 mb-2">UNSEAL ARCHIVED COLLECTION?</h3>
+            <p id="break-archive-desc" class="text-xs text-gray-300 mb-6 leading-relaxed">
+                This collection is currently 100% complete! Removing a card will break your completed archive status. Are you sure you wish to break the seal?
+            </p>
+            <div class="flex gap-3">
+                <button id="btn-break-confirm" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-lg shadow-rose-950/40 transition-all">
+                    Yes, Uncheck Card
+                </button>
+                <button id="btn-break-cancel" class="flex-1 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-gray-300 hover:text-white text-xs transition-all">
+                    Cancel & Keep Intact
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-gray-800/60 bg-gray-950 py-4 px-6 text-center text-xs text-gray-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -434,9 +459,7 @@
         </div>
     </footer>
 
-    <!-- Scripts & Binder Logic -->
     <script>
-        // STREAMING_CHUNK: Instantiating the new card databases including The Hobbit cards...
         // Core data structures
         const POSTER_CARDS = [
             { id: 731, name: "Dawn of a New Age", set: "ltr", num: "731", rarity: "Mythic" },
@@ -494,50 +517,49 @@
             { id: 823, name: "Tom Bombadil", set: "ltr", num: "823", rarity: "Mythic" }
         ];
 
-        // 10 Book Cover Art cards in surge foil (7 revealed, 3 placeholders)
+        // 10 Book Cover Art cards in surge foil (#276 to #285)
         const BOOKCOVER_CARDS = [
+            { id: 276, name: "The Lord of the Eagles", set: "hob", num: "276", rarity: "Rare" },
             { id: 277, name: "Gollum, Riddle Master", set: "hob", num: "277", rarity: "Mythic" },
             { id: 278, name: "Gandalf, Goblins' Bane // Flameshape", set: "hob", num: "278", rarity: "Mythic" },
             { id: 279, name: "Thorin, Mountain-king", set: "hob", num: "279", rarity: "Mythic" },
             { id: 280, name: "Bard, King of Dale", set: "hob", num: "280", rarity: "Mythic" },
-            { id: 281, name: "Book Cover Card Placeholder", set: "hob", num: "281", rarity: "Mythic", isPlaceholder: true },
+            { id: 281, name: "Unrevealed Book Cover #281", set: "hob", num: "281", rarity: "Rare" },
             { id: 282, name: "Thranduil, the Elvenking", set: "hob", num: "282", rarity: "Mythic" },
             { id: 283, name: "The Arkenstone // Seek the Heart", set: "hob", num: "283", rarity: "Mythic" },
             { id: 284, name: "The Lonely Mountain", set: "hob", num: "284", rarity: "Rare" },
-            { id: 285, name: "Book Cover Card Placeholder", set: "hob", num: "285", rarity: "Mythic", isPlaceholder: true },
-            { id: 286, name: "Book Cover Card Placeholder", set: "hob", num: "286", rarity: "Mythic", isPlaceholder: true }
+            { id: 285, name: "Unrevealed Book Cover #285", set: "hob", num: "285", rarity: "Rare" }
         ];
 
-        // 25 Dragon Hoard Frame cards in surge foil (8 revealed, 17 placeholders)
+        // 25 Dragon Hoard Frame cards in surge foil (#251 to #275)
         const DRAGON_CARDS = [
+            { id: 251, name: "Unrevealed Dragon Hoard #251", set: "hob", num: "251", rarity: "Rare" },
+            { id: 252, name: "Unrevealed Dragon Hoard #252", set: "hob", num: "252", rarity: "Rare" },
             { id: 253, name: "The Queen of Dale", set: "hob", num: "253", rarity: "Mythic" },
             { id: 254, name: "Bilbo, Luckwearer // Burglar's Plot", set: "hob", num: "254", rarity: "Mythic" },
             { id: 255, name: "Bilbo, Thief in the Night", set: "hob", num: "255", rarity: "Mythic" },
-            { id: 256, name: "Dragon Hoard Placeholder", set: "hob", num: "256", rarity: "Rare", isPlaceholder: true },
-            { id: 257, name: "Dragon Hoard Placeholder", set: "hob", num: "257", rarity: "Rare", isPlaceholder: true },
-            { id: 258, name: "Dragon Hoard Placeholder", set: "hob", num: "258", rarity: "Rare", isPlaceholder: true },
-            { id: 259, name: "Dragon Hoard Placeholder", set: "hob", num: "259", rarity: "Rare", isPlaceholder: true },
-            { id: 260, name: "Dragon Hoard Placeholder", set: "hob", num: "260", rarity: "Rare", isPlaceholder: true },
-            { id: 261, name: "Dragon Hoard Placeholder", set: "hob", num: "261", rarity: "Rare", isPlaceholder: true },
+            { id: 256, name: "Unrevealed Dragon Hoard #256", set: "hob", num: "256", rarity: "Rare" },
+            { id: 257, name: "Unrevealed Dragon Hoard #257", set: "hob", num: "257", rarity: "Rare" },
+            { id: 258, name: "Unrevealed Dragon Hoard #258", set: "hob", num: "258", rarity: "Rare" },
+            { id: 259, name: "Unrevealed Dragon Hoard #259", set: "hob", num: "259", rarity: "Rare" },
+            { id: 260, name: "Unrevealed Dragon Hoard #260", set: "hob", num: "260", rarity: "Rare" },
+            { id: 261, name: "Unrevealed Dragon Hoard #261", set: "hob", num: "261", rarity: "Rare" },
             { id: 262, name: "Desolation of Smaug", set: "hob", num: "262", rarity: "Rare" },
-            { id: 263, name: "Dragon Hoard Placeholder", set: "hob", num: "263", rarity: "Rare", isPlaceholder: true },
-            { id: 264, name: "Dragon Hoard Placeholder", set: "hob", num: "264", rarity: "Rare", isPlaceholder: true },
+            { id: 263, name: "Unrevealed Dragon Hoard #263", set: "hob", num: "263", rarity: "Rare" },
+            { id: 264, name: "Unrevealed Dragon Hoard #264", set: "hob", num: "264", rarity: "Rare" },
             { id: 265, name: "Smaug the Magnificent", set: "hob", num: "265", rarity: "Mythic" },
-            { id: 266, name: "Dragon Hoard Placeholder", set: "hob", num: "266", rarity: "Rare", isPlaceholder: true },
-            { id: 267, name: "Dragon Hoard Placeholder", set: "hob", num: "267", rarity: "Rare", isPlaceholder: true },
-            { id: 268, name: "Dragon Hoard Placeholder", set: "hob", num: "268", rarity: "Rare", isPlaceholder: true },
-            { id: 269, name: "Dragon Hoard Placeholder", set: "hob", num: "269", rarity: "Rare", isPlaceholder: true },
+            { id: 266, name: "Unrevealed Dragon Hoard #266", set: "hob", num: "266", rarity: "Rare" },
+            { id: 267, name: "Unrevealed Dragon Hoard #267", set: "hob", num: "267", rarity: "Rare" },
+            { id: 268, name: "Unrevealed Dragon Hoard #268", set: "hob", num: "268", rarity: "Rare" },
+            { id: 269, name: "Unrevealed Dragon Hoard #269", set: "hob", num: "269", rarity: "Rare" },
             { id: 270, name: "The Arkenstone // Seek the Heart", set: "hob", num: "270", rarity: "Mythic" },
             { id: 271, name: "My Precious // Allure of Power", set: "hob", num: "271", rarity: "Mythic" },
-            { id: 272, name: "Dragon Hoard Placeholder", set: "hob", num: "272", rarity: "Rare", isPlaceholder: true },
+            { id: 272, name: "Unrevealed Dragon Hoard #272", set: "hob", num: "272", rarity: "Rare" },
             { id: 273, name: "Sting, Bilbo's Sword", set: "hob", num: "273", rarity: "Rare" },
-            { id: 274, name: "Dragon Hoard Placeholder", set: "hob", num: "274", rarity: "Rare", isPlaceholder: true },
-            { id: 275, name: "Dragon Hoard Placeholder", set: "hob", num: "275", rarity: "Rare", isPlaceholder: true },
-            { id: 276, name: "Dragon Hoard Placeholder", set: "hob", num: "276", rarity: "Rare", isPlaceholder: true },
-            { id: 277, name: "Dragon Hoard Placeholder", set: "hob", num: "277a", rarity: "Rare", isPlaceholder: true }
+            { id: 274, name: "Unrevealed Dragon Hoard #274", set: "hob", num: "274", rarity: "Rare" },
+            { id: 275, name: "Unrevealed Dragon Hoard #275", set: "hob", num: "275", rarity: "Rare" }
         ];
 
-        // STREAMING_CHUNK: Managing state modules and cache...
         // Dynamic Live Database-Driven Grails List
         let grailsCollection = [];
 
@@ -549,13 +571,10 @@
         let statusFilter = 'all';
         let isCoverMode = false; 
         let layoutType = '2x2'; // grid: 2x2 or 3x3
+        let viewMode = 'chase'; // 'chase' or 'archive'
 
         // Cache for loaded MTG card images
         const imagePool = {};
-
-        // Audio State
-        let soundEnabled = true;
-        let audioCtx = null;
 
         // Visual animation variables
         let hoverCardIndex = -1;
@@ -574,31 +593,27 @@
         const processedRingCanvas = document.createElement('canvas');
         const pCtx = processedRingCanvas.getContext('2d');
 
-        // Post-processing of transparent inverted gold script once the file is loaded
         ringScriptImg.onload = () => {
             ringScriptLoaded = true;
             const size = Math.max(ringScriptImg.width, ringScriptImg.height) || 450;
             processedRingCanvas.width = size;
             processedRingCanvas.height = size;
 
-            // Draw original in inverted space (turns black writing on white bg to white on black)
             pCtx.filter = 'invert(1)';
             pCtx.drawImage(ringScriptImg, 0, 0, size, size);
 
-            // Mask with a bright golden-orange flame gradient to colorize script beautifully
             pCtx.filter = 'none';
             pCtx.globalCompositeOperation = 'source-in';
 
             const grad = pCtx.createRadialGradient(size/2, size/2, size/6, size/2, size/2, size/2);
-            grad.addColorStop(0, '#ffeb99'); // Inner super-hot gold
-            grad.addColorStop(0.35, '#ff9000'); // Radiant orange
-            grad.addColorStop(0.7, '#ff3000'); // Fiery deep orange-red
-            grad.addColorStop(1, '#a61c00'); // Smoldering edge red
+            grad.addColorStop(0, '#ffeb99');
+            grad.addColorStop(0.35, '#ff9000');
+            grad.addColorStop(0.7, '#ff3000');
+            grad.addColorStop(1, '#a61c00');
 
             pCtx.fillStyle = grad;
             pCtx.fillRect(0, 0, size, size);
 
-            // Reset composition framework back to default
             pCtx.globalCompositeOperation = 'source-over';
         };
 
@@ -610,7 +625,6 @@
         const V_WIDTH = 1000;
         const V_HEIGHT = 1100;
 
-        // Cross-browser crash-proof rounded rectangle coordinate path generator
         function drawRoundRect(ctx, x, y, w, h, r) {
             ctx.moveTo(x + r, y);
             ctx.lineTo(x + w - r, y);
@@ -623,7 +637,7 @@
             ctx.arcTo(x, y, x + w, y, r);
         }
 
-        // Dynamic Grid Calculation Engine
+        // 2x2 vs 3x3 layout position generator with ample vertical spacing
         function getGridLayout() {
             if (layoutType === '2x2') {
                 return {
@@ -659,31 +673,20 @@
 
         // Initialize state
         function initApp() {
-            // Load collection from local storage
             const cached = localStorage.getItem('mtg_binder_collection');
             if (cached) {
-                try {
-                    collection = JSON.parse(cached);
-                } catch(e) {
-                    collection = {};
-                }
+                try { collection = JSON.parse(cached); } catch(e) { collection = {}; }
             } else {
                 collection = {};
             }
 
-            // Load Custom Grails collection List from local storage
             const cachedGrails = localStorage.getItem('mtg_binder_grails');
             if (cachedGrails) {
-                try {
-                    grailsCollection = JSON.parse(cachedGrails);
-                } catch(e) {
-                    grailsCollection = getDefaultGrails();
-                }
+                try { grailsCollection = JSON.parse(cachedGrails); } catch(e) { grailsCollection = []; }
             } else {
-                grailsCollection = getDefaultGrails();
+                grailsCollection = [];
             }
 
-            // Load dynamic layout setting if saved
             const cachedLayout = localStorage.getItem('mtg_binder_layout_type');
             if (cachedLayout === '2x2' || cachedLayout === '3x3') {
                 layoutType = cachedLayout;
@@ -697,80 +700,160 @@
             bindEvents();
             resizeCanvas();
 
-            // Set up cover mode upon startup
             isCoverMode = true;
             document.getElementById('cover-toggle-text').innerText = "Open Binder";
 
-            // Kick off animations
             requestAnimationFrame(animateLoop);
         }
 
-        // Return an empty array so only user-added grails are populated
-        function getDefaultGrails() {
-            return [];
+        function isSectionComplete(secKey) {
+            if (secKey === 'poster') {
+                return POSTER_CARDS.length > 0 && POSTER_CARDS.every(c => collection[`poster-${c.id}`]);
+            } else if (secKey === 'realms') {
+                return REALMS_CARDS.length > 0 && REALMS_CARDS.every(c => collection[`realms-${c.id}`]);
+            } else if (secKey === 'bookcover') {
+                return BOOKCOVER_CARDS.length > 0 && BOOKCOVER_CARDS.every(c => collection[`bookcover-${c.id}`]);
+            } else if (secKey === 'dragon') {
+                return DRAGON_CARDS.length > 0 && DRAGON_CARDS.every(c => collection[`dragon-${c.id}`]);
+            } else if (secKey === 'grails') {
+                return grailsCollection.length > 0 && grailsCollection.every(c => collection[`grails-${c.set}-${c.num}`]);
+            }
+            return false;
         }
 
-        // Audio synthesis for immersive tactile feedback
-        function playPageTurnSound() {
-            if (!soundEnabled) return;
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(320, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.35);
-                osc.frequency.linearRampToValueAtTime(70, audioCtx.currentTime + 0.35);
-
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.35);
-            } catch (e) {}
+        function getVisibleSections() {
+            const allSections = ['poster', 'realms', 'bookcover', 'dragon', 'grails'];
+            return allSections.filter(sec => {
+                const complete = isSectionComplete(sec);
+                return viewMode === 'chase' ? !complete : complete;
+            });
         }
 
-        function playCardClickSound(owned) {
-            if (!soundEnabled) return;
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
+        function syncSectionVisibility() {
+            const visible = getVisibleSections();
 
-                osc.type = 'sine';
-                if (owned) {
-                    // Satisfying positive feedback ding
-                    osc.frequency.setValueAtTime(440, audioCtx.currentTime); // A4
-                    osc.frequency.setValueAtTime(554.37, audioCtx.currentTime + 0.08); // C#5
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.16); // E5
-                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                    gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.35);
-                } else {
-                    // Quick friction swoosh sound for taking a card out
-                    osc.frequency.setValueAtTime(140, audioCtx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(65, audioCtx.currentTime + 0.12);
-                    osc.frequency.linearRampToValueAtTime(65, audioCtx.currentTime + 0.12);
-                    gain.gain.setValueAtTime(0.14, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-                    gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.12);
+            const tabs = {
+                poster: document.getElementById('tab-poster'),
+                realms: document.getElementById('tab-realms'),
+                bookcover: document.getElementById('tab-bookcover'),
+                dragon: document.getElementById('tab-dragon'),
+                grails: document.getElementById('tab-grails')
+            };
+
+            Object.keys(tabs).forEach(sec => {
+                if (tabs[sec]) {
+                    if (visible.includes(sec)) {
+                        tabs[sec].style.display = 'flex';
+                    } else {
+                        tabs[sec].style.display = 'none';
+                    }
                 }
-            } catch (e) {}
+            });
+
+            if (activeSection && !visible.includes(activeSection)) {
+                if (visible.length > 0) {
+                    switchSection(visible[0]);
+                } else {
+                    activeSection = null;
+                    updateTabStyles();
+                    updatePaginationUI();
+                }
+            } else if (!activeSection && visible.length > 0) {
+                switchSection(visible[0]);
+            } else {
+                updateTabStyles();
+            }
         }
 
-        // STREAMING_CHUNK: Recalculating stats progress arrays across all five sections...
-        // Metric recalculations
-        function updateStats() {
+        function triggerVictoryCelebration(secName) {
+            const modal = document.getElementById('victory-modal');
+            const subtitle = document.getElementById('victory-modal-subtitle');
+            const body = document.getElementById('victory-modal-body');
+
+            subtitle.innerText = `You have completed the entire ${secName} collection!`;
+            
+            const quotes = [
+                '"By the light of Eärendil and the ancient fires of Erebor, your vault shines with complete triumph!"',
+                '"A masterwork fit for the vaults of Minas Tirith! Every scroll in this section is accounted for!"',
+                '"Not even Smaug\'s dragon-hoard holds a collection as glorious as the one you have assembled!"',
+                '"From Bilbo\'s study to Rivendell\'s archives, songs shall be sung of your dedication!"'
+            ];
+            body.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        let pendingCompletedSection = null;
+
+        function closeVictoryModal() {
+            const modal = document.getElementById('victory-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                if (pendingCompletedSection) {
+                    pendingCompletedSection = null;
+                    updateStats(); // Move section to Archive Mode after claiming victory
+                }
+            }, 300);
+        }
+
+        let pendingCardToggle = null;
+
+        function promptBreakArchiveModal(card, toggleAction) {
+            pendingCardToggle = toggleAction;
+            const modal = document.getElementById('break-archive-modal');
+            const desc = document.getElementById('break-archive-desc');
+            desc.innerText = `"${card.name}" belongs to a 100% completed collection! Removing it will unseal the collection and return it to Chase Mode. Are you sure?`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeBreakArchiveModal() {
+            document.getElementById('break-archive-modal').classList.add('hidden');
+            pendingCardToggle = null;
+        }
+
+        function handleCardOwnershipToggle(card) {
+            const targetSection = activeSection;
+            const key = targetSection === 'grails' ? `grails-${card.set}-${card.num}` : `${targetSection}-${card.id}`;
+            const isOwnedCurrently = !!collection[key];
+            const wasCompleteBefore = isSectionComplete(targetSection);
+
+            if (isOwnedCurrently && (viewMode === 'archive' || wasCompleteBefore)) {
+                promptBreakArchiveModal(card, () => {
+                    executeCardToggle(card, key, targetSection, wasCompleteBefore);
+                });
+            } else {
+                executeCardToggle(card, key, targetSection, wasCompleteBefore);
+            }
+        }
+
+        function executeCardToggle(card, key, targetSection, wasCompleteBefore) {
+            const newState = !collection[key];
+            collection[key] = newState;
+
+            const isCompleteNow = isSectionComplete(targetSection);
+
+            if (!wasCompleteBefore && isCompleteNow) {
+                pendingCompletedSection = targetSection;
+                updateStatsNumbersOnly();
+                
+                const sectionLabels = {
+                    poster: 'Poster Art',
+                    realms: 'Ring Showcase',
+                    bookcover: 'The Hobbit Book Cover',
+                    dragon: 'The Hobbit Dragon Hoard',
+                    grails: 'Vault Grails'
+                };
+                triggerVictoryCelebration(sectionLabels[targetSection] || 'Binder');
+            } else {
+                updateStats();
+            }
+        }
+
+        function updateStatsNumbersOnly() {
             const totalPoster = POSTER_CARDS.length;
             const totalRealms = REALMS_CARDS.length;
             const totalBookcover = BOOKCOVER_CARDS.length;
@@ -778,67 +861,54 @@
             const totalGrails = grailsCollection.length;
 
             let ownedPoster = 0;
-            POSTER_CARDS.forEach(c => {
-                if (collection[`poster-${c.id}`]) ownedPoster++;
-            });
+            POSTER_CARDS.forEach(c => { if (collection[`poster-${c.id}`]) ownedPoster++; });
 
             let ownedRealms = 0;
-            REALMS_CARDS.forEach(c => {
-                if (collection[`realms-${c.id}`]) ownedRealms++;
-            });
+            REALMS_CARDS.forEach(c => { if (collection[`realms-${c.id}`]) ownedRealms++; });
 
             let ownedBookcover = 0;
-            BOOKCOVER_CARDS.forEach(c => {
-                if (collection[`bookcover-${c.id}`]) ownedBookcover++;
-            });
+            BOOKCOVER_CARDS.forEach(c => { if (collection[`bookcover-${c.id}`]) ownedBookcover++; });
 
             let ownedDragon = 0;
-            DRAGON_CARDS.forEach(c => {
-                if (collection[`dragon-${c.id}`]) ownedDragon++;
-            });
+            DRAGON_CARDS.forEach(c => { if (collection[`dragon-${c.id}`]) ownedDragon++; });
 
             let ownedGrails = 0;
-            grailsCollection.forEach(c => {
-                if (collection[`grails-${c.set}-${c.num}`]) ownedGrails++;
-            });
+            grailsCollection.forEach(c => { if (collection[`grails-${c.set}-${c.num}`]) ownedGrails++; });
 
             const ownedTotal = ownedPoster + ownedRealms + ownedBookcover + ownedDragon;
             const totalFoil = totalPoster + totalRealms + totalBookcover + totalDragon;
             const globalPercent = Math.round((ownedTotal / totalFoil) * 100) || 0;
 
-            // UI Elements update
             document.getElementById('txt-total-progress').innerText = `${globalPercent}% (${ownedTotal}/${totalFoil})`;
             document.getElementById('bar-total-progress').style.width = `${globalPercent}%`;
 
             document.getElementById('txt-poster-progress').innerText = `${ownedPoster}/${totalPoster}`;
-            const posterPercent = Math.round((ownedPoster / totalPoster) * 100) || 0;
-            document.getElementById('bar-poster-progress').style.width = `${posterPercent}%`;
+            document.getElementById('bar-poster-progress').style.width = `${Math.round((ownedPoster / totalPoster) * 100) || 0}%`;
 
             document.getElementById('txt-realms-progress').innerText = `${ownedRealms}/${totalRealms}`;
-            const realmsPercent = Math.round((ownedRealms / totalRealms) * 100) || 0;
-            document.getElementById('bar-realms-progress').style.width = `${realmsPercent}%`;
+            document.getElementById('bar-realms-progress').style.width = `${Math.round((ownedRealms / totalRealms) * 100) || 0}%`;
 
             document.getElementById('txt-bookcover-progress').innerText = `${ownedBookcover}/${totalBookcover}`;
-            const bookcoverPercent = Math.round((ownedBookcover / totalBookcover) * 100) || 0;
-            document.getElementById('bar-bookcover-progress').style.width = `${bookcoverPercent}%`;
+            document.getElementById('bar-bookcover-progress').style.width = `${Math.round((ownedBookcover / totalBookcover) * 100) || 0}%`;
 
             document.getElementById('txt-dragon-progress').innerText = `${ownedDragon}/${totalDragon}`;
-            const dragonPercent = Math.round((ownedDragon / totalDragon) * 100) || 0;
-            document.getElementById('bar-dragon-progress').style.width = `${dragonPercent}%`;
+            document.getElementById('bar-dragon-progress').style.width = `${Math.round((ownedDragon / totalDragon) * 100) || 0}%`;
 
             document.getElementById('txt-grails-progress').innerText = `${ownedGrails}/${totalGrails}`;
-            const grailsPercent = totalGrails > 0 ? Math.round((ownedGrails / totalGrails) * 100) : 0;
-            document.getElementById('bar-grails-progress').style.width = `${grailsPercent}%`;
+            document.getElementById('bar-grails-progress').style.width = `${totalGrails > 0 ? Math.round((ownedGrails / totalGrails) * 100) : 0}%`;
 
-            // Persist locally
             localStorage.setItem('mtg_binder_collection', JSON.stringify(collection));
             localStorage.setItem('mtg_binder_grails', JSON.stringify(grailsCollection));
             localStorage.setItem('mtg_binder_layout_type', layoutType);
         }
 
-        // STREAMING_CHUNK: Filtering the active catalog card list...
-        // Retrieve current active cards list based on filtering
+        function updateStats() {
+            updateStatsNumbersOnly();
+            syncSectionVisibility();
+        }
+
         function getFilteredCards() {
+            if (!activeSection) return [];
             let list;
             if (activeSection === 'poster') {
                 list = POSTER_CARDS;
@@ -853,10 +923,7 @@
             }
 
             return list.filter(card => {
-                // Name match
                 const matchSearch = card.name.toLowerCase().includes(searchFilter.toLowerCase());
-
-                // Ownership match
                 const key = activeSection === 'grails' ? `grails-${card.set}-${card.num}` : `${activeSection}-${card.id}`;
                 const isOwned = !!collection[key];
                 const matchStatus = statusFilter === 'all' || 
@@ -867,7 +934,6 @@
             });
         }
 
-        // Get virtual page breakdown dynamically using cardsPerPage setting
         function getPages() {
             const list = getFilteredCards();
             const pages = [];
@@ -878,7 +944,6 @@
             return pages;
         }
 
-        // Map mouse inputs relative to responsive viewport back to Canvas space coordinates
         function getMousePos(evt) {
             const rect = canvas.getBoundingClientRect();
             const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
@@ -889,16 +954,13 @@
             return { x, y };
         }
 
-        // Draw the background binder cover layout (Closed View)
         function drawCover(ctx) {
-            // Dark elegant background
             const bgGrad = ctx.createRadialGradient(V_WIDTH/2, V_HEIGHT/2, 100, V_WIDTH/2, V_HEIGHT/2, V_WIDTH);
             bgGrad.addColorStop(0, '#1c1711');
             bgGrad.addColorStop(1, '#0c0a07');
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
 
-            // Procedural heavy leather texture lines
             ctx.strokeStyle = 'rgba(0,0,0,0.15)';
             ctx.lineWidth = 10;
             for(let i=0; i < V_HEIGHT; i += 40) {
@@ -907,14 +969,12 @@
                 ctx.stroke();
             }
 
-            // Outer border seam stitches
             ctx.strokeStyle = '#d4af37';
             ctx.lineWidth = 4;
             ctx.setLineDash([12, 12]);
             ctx.strokeRect(35, 35, V_WIDTH - 70, V_HEIGHT - 70);
-            ctx.setLineDash([]); // Reset dash
+            ctx.setLineDash([]);
 
-            // Golden corner guard accents
             const corners = [
                 {x: 35, y: 35, rx: 1, ry: 1},
                 {x: V_WIDTH-35, y: 35, rx: -1, ry: 1},
@@ -935,12 +995,10 @@
                 ctx.stroke();
             });
 
-            // Positioning variables for the Elvish Ring Centerpiece
             const ringX = V_WIDTH / 2;
             const ringY = V_HEIGHT / 2 - 40;
             const ringRadius = 155;
 
-            // Soft atmospheric fire-light aura behind the Elvish Script
             const pulseRate = Math.sin(Date.now() / 320);
             const auraScale = 110 + (pulseRate * 12);
             const aura = ctx.createRadialGradient(ringX, ringY, ringRadius - 55, ringX, ringY, ringRadius + auraScale);
@@ -953,17 +1011,14 @@
             ctx.arc(ringX, ringY, ringRadius + 220, 0, Math.PI * 2);
             ctx.fill();
 
-            // Apply authentic Elvish Script image layout directly onto cover (without golden ring underneath)
             ctx.save();
             ctx.shadowColor = '#ff3d00';
             ctx.shadowBlur = 15 + (pulseRate * 6);
             ctx.globalAlpha = 0.85 + (pulseRate * 0.15);
 
             if (ringScriptLoaded) {
-                // Draws the processed glowing gold-orange script from image_30c465.png perfectly centered
                 ctx.drawImage(processedRingCanvas, ringX - 220, ringY - 220, 440, 440);
             } else {
-                // Visual procedural fallback while waiting for network stream
                 ctx.strokeStyle = `rgba(255, 120, 10, ${0.75 + (pulseRate * 0.2)})`;
                 ctx.lineWidth = 2.5;
                 for (let i = 0; i < 24; i++) {
@@ -976,7 +1031,6 @@
             }
             ctx.restore();
 
-            // Text Titles
             ctx.fillStyle = '#ffdf7e';
             ctx.font = 'bold 36px Cinzel';
             ctx.textBaseline = 'middle';
@@ -992,29 +1046,33 @@
             ctx.fillText('TAP COVER TO OPEN ARCHIVE', V_WIDTH/2, V_HEIGHT/2 + 420);
         }
 
-        // STREAMING_CHUNK: Drafting open binder textures and spine D-rings...
-        // Draw open binder with pages and dynamic layout slots
+        async function fetchScryfallCardDetails(card) {
+            try {
+                const response = await fetch(`https://api.scryfall.com/cards/${card.set}/${card.num}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.name) card.name = data.name;
+                    if (data.rarity) card.rarity = data.rarity.charAt(0).toUpperCase() + data.rarity.slice(1);
+                }
+            } catch(e) {}
+        }
+
         function drawOpenBinder(ctx, pageCards) {
-            // Draw background table
             ctx.fillStyle = '#07080a';
             ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
 
-            // Left spine binder cover strip (leather shadow effect)
             ctx.fillStyle = '#141721';
             ctx.fillRect(0, 0, 70, V_HEIGHT);
             ctx.fillStyle = '#1e2433';
             ctx.fillRect(0, 0, 64, V_HEIGHT);
 
-            // Binder center metal ring spine overlay
             const ringSpineX = 35;
             ctx.fillStyle = '#0a0d14';
             ctx.fillRect(ringSpineX - 8, 0, 16, V_HEIGHT);
 
-            // Draw Page Sheet backing
             ctx.fillStyle = '#121620';
             ctx.fillRect(70, 0, V_WIDTH - 70, V_HEIGHT);
 
-            // Soft white/blue sheet highlight sheen
             const paperSheen = ctx.createLinearGradient(70, 0, V_WIDTH, V_HEIGHT);
             paperSheen.addColorStop(0, 'rgba(255,255,255,0.03)');
             paperSheen.addColorStop(0.5, 'rgba(0,0,0,0)');
@@ -1022,7 +1080,6 @@
             ctx.fillStyle = paperSheen;
             ctx.fillRect(70, 0, V_WIDTH - 70, V_HEIGHT);
 
-            // Draw physical D-rings passing through reinforced sheet holes
             const ringYCoordinates = [150, 550, 950];
             ringYCoordinates.forEach(y => {
                 ctx.fillStyle = 'rgba(0,0,0,0.6)';
@@ -1057,13 +1114,29 @@
                 ctx.stroke();
             });
 
-            // Get dynamic coordinates
+            if (!activeSection) {
+                ctx.fillStyle = '#d4af37';
+                ctx.font = 'bold 22px Cinzel';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const emptyMsg = viewMode === 'chase' 
+                    ? '🎉 ALL COLLECTIONS COMPLETED!' 
+                    : '🏛️ NO ARCHIVED COLLECTIONS YET';
+                const subMsg = viewMode === 'chase'
+                    ? 'Switch to Archive Mode to admire your finished sets.'
+                    : 'Complete a section 100% in Chase Mode to archive it here.';
+                
+                ctx.fillText(emptyMsg, V_WIDTH / 2 + 35, V_HEIGHT / 2 - 20);
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '14px Inter';
+                ctx.fillText(subMsg, V_WIDTH / 2 + 35, V_HEIGHT / 2 + 20);
+                return;
+            }
+
             const currentLayout = getGridLayout();
             const slotWidth = currentLayout.cardWidth;
             const slotHeight = currentLayout.cardHeight;
 
-            // STREAMING_CHUNK: Rendering card sleeves, Scryfall art and custom placeholders...
-            // Render Card Slots based on active layout parameters
             currentLayout.slots.forEach((slot, index) => {
                 const card = pageCards[index];
 
@@ -1073,7 +1146,7 @@
                 ctx.beginPath();
                 drawRoundRect(ctx, slot.x - 8, slot.y - 8, slotWidth + 16, slotHeight + 16, 12);
                 ctx.fill();
-                ctx.shadowBlur = 0; // Reset
+                ctx.shadowBlur = 0;
 
                 ctx.strokeStyle = '#2a3245';
                 ctx.lineWidth = 2;
@@ -1084,15 +1157,61 @@
                 if (card) {
                     const key = activeSection === 'grails' ? `grails-${card.set}-${card.num}` : `${activeSection}-${card.id}`;
                     const isOwned = !!collection[key];
+                    const imageSrc = `https://api.scryfall.com/cards/${card.set}/${card.num}?format=image&version=normal`;
 
-                    if (card.isPlaceholder) {
-                        // Drawing beautiful custom placeholder frame for unrevealed cards
+                    if (!imagePool[imageSrc]) {
+                        imagePool[imageSrc] = { loaded: false, error: false, img: new Image() };
+                        imagePool[imageSrc].img.crossOrigin = 'anonymous';
+                        imagePool[imageSrc].img.src = imageSrc;
+                        imagePool[imageSrc].img.onload = () => {
+                            imagePool[imageSrc].loaded = true;
+                            imagePool[imageSrc].error = false;
+                            if (card.name.startsWith("Unrevealed")) {
+                                fetchScryfallCardDetails(card);
+                            }
+                        };
+                        imagePool[imageSrc].img.onerror = () => {
+                            imagePool[imageSrc].loaded = true;
+                            imagePool[imageSrc].error = true;
+                        };
+                    }
+
+                    const cardImgObj = imagePool[imageSrc];
+
+                    if (cardImgObj.loaded && !cardImgObj.error) {
+                        ctx.save();
+
+                        if (!isOwned) {
+                            ctx.filter = 'grayscale(100%) contrast(75%) brightness(60%)';
+                        } else {
+                            ctx.filter = 'contrast(102%) brightness(95%)';
+                        }
+
+                        ctx.beginPath();
+                        drawRoundRect(ctx, slot.x, slot.y, slotWidth, slotHeight, 10);
+                        ctx.clip();
+
+                        ctx.drawImage(cardImgObj.img, slot.x, slot.y, slotWidth, slotHeight);
+                        
+                        if (!isOwned) {
+                            ctx.fillStyle = 'rgba(8, 10, 16, 0.78)';
+                            ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
+                        }
+
+                        ctx.restore();
+
+                        if (isOwned) {
+                            applyFoilShader(ctx, slot, card, slotWidth, slotHeight);
+                        }
+
+                        drawPlasticSleeveSheen(ctx, slot, slotWidth, slotHeight);
+
+                    } else if (cardImgObj.loaded && cardImgObj.error) {
                         ctx.save();
                         ctx.beginPath();
                         drawRoundRect(ctx, slot.x, slot.y, slotWidth, slotHeight, 10);
                         ctx.clip();
 
-                        // Mystical dark runic slate background
                         const placeholderGrad = ctx.createRadialGradient(
                             slot.x + slotWidth / 2, slot.y + slotHeight / 2, 20,
                             slot.x + slotWidth / 2, slot.y + slotHeight / 2, slotWidth
@@ -1103,23 +1222,22 @@
                         ctx.fillStyle = placeholderGrad;
                         ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
 
-                        // Golden Smaug eye symbol or decorative runic sigil in center
                         const pulse = Math.sin(Date.now() / 250) * 0.15 + 0.85;
-                        ctx.strokeStyle = `rgba(212, 175, 55, ${isOwned ? 0.35 * pulse : 0.08})`;
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${isOwned ? 0.4 * pulse : 0.12})`;
                         ctx.lineWidth = 2.5;
                         ctx.beginPath();
                         ctx.arc(slot.x + slotWidth / 2, slot.y + slotHeight / 2 - 20, 35, 0, Math.PI * 2);
                         ctx.stroke();
 
-                        ctx.fillStyle = `rgba(212, 175, 55, ${isOwned ? 0.8 : 0.25})`;
+                        ctx.fillStyle = `rgba(212, 175, 55, ${isOwned ? 0.9 : 0.3})`;
                         ctx.font = 'bold 12px serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText('UNREVEALED', slot.x + slotWidth / 2, slot.y + slotHeight / 2 - 20);
+                        ctx.fillText('REVEALED SOON', slot.x + slotWidth / 2, slot.y + slotHeight / 2 - 20);
 
                         ctx.fillStyle = '#64748b';
                         ctx.font = '10px Inter';
-                        ctx.fillText('Smaug\'s Prophecy', slot.x + slotWidth / 2, slot.y + slotHeight / 2 + 15);
+                        ctx.fillText(`HOB #${card.num}`, slot.x + slotWidth / 2, slot.y + slotHeight / 2 + 15);
 
                         ctx.restore();
 
@@ -1129,70 +1247,26 @@
                         drawPlasticSleeveSheen(ctx, slot, slotWidth, slotHeight);
 
                     } else {
-                        // Regular Scryfall API Database card
-                        const imageSrc = `https://api.scryfall.com/cards/${card.set}/${card.num}?format=image&version=normal`;
+                        ctx.fillStyle = '#090b10';
+                        ctx.beginPath();
+                        drawRoundRect(ctx, slot.x, slot.y, slotWidth, slotHeight, 10);
+                        ctx.fill();
 
-                        if (!imagePool[imageSrc]) {
-                            imagePool[imageSrc] = { loaded: false, img: new Image() };
-                            imagePool[imageSrc].img.crossOrigin = 'anonymous';
-                            imagePool[imageSrc].img.src = imageSrc;
-                            imagePool[imageSrc].img.onload = () => {
-                                imagePool[imageSrc].loaded = true;
-                            };
-                        }
+                        const loaderPulse = Math.sin(Date.now() / 200) * 0.15 + 0.85;
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.1 * loaderPulse})`;
+                        ctx.lineWidth = 4;
+                        ctx.beginPath();
+                        ctx.arc(slot.x + slotWidth/2, slot.y + slotHeight/2, Math.min(slotWidth, slotHeight)/4, 0, Math.PI*2);
+                        ctx.stroke();
 
-                        const cardImgObj = imagePool[imageSrc];
-
-                        if (cardImgObj.loaded) {
-                            ctx.save();
-
-                            if (!isOwned) {
-                                ctx.filter = 'grayscale(100%) contrast(75%) brightness(60%)';
-                            } else {
-                                ctx.filter = 'contrast(102%) brightness(95%)';
-                            }
-
-                            ctx.beginPath();
-                            drawRoundRect(ctx, slot.x, slot.y, slotWidth, slotHeight, 10);
-                            ctx.clip();
-
-                            ctx.drawImage(cardImgObj.img, slot.x, slot.y, slotWidth, slotHeight);
-                            
-                            if (!isOwned) {
-                                ctx.fillStyle = 'rgba(8, 10, 16, 0.78)';
-                                ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
-                            }
-
-                            ctx.restore();
-
-                            if (isOwned) {
-                                applyFoilShader(ctx, slot, card, slotWidth, slotHeight);
-                            }
-
-                            drawPlasticSleeveSheen(ctx, slot, slotWidth, slotHeight);
-
-                        } else {
-                            ctx.fillStyle = '#090b10';
-                            ctx.beginPath();
-                            drawRoundRect(ctx, slot.x, slot.y, slotWidth, slotHeight, 10);
-                            ctx.fill();
-
-                            const loaderPulse = Math.sin(Date.now() / 200) * 0.15 + 0.85;
-                            ctx.strokeStyle = `rgba(212, 175, 55, ${0.1 * loaderPulse})`;
-                            ctx.lineWidth = 4;
-                            ctx.beginPath();
-                            ctx.arc(slot.x + slotWidth/2, slot.y + slotHeight/2, Math.min(slotWidth, slotHeight)/4, 0, Math.PI*2);
-                            ctx.stroke();
-
-                            ctx.fillStyle = '#d4af37';
-                            ctx.font = 'italic 10px Inter';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('CHARGING SCROLL...', slot.x + slotWidth/2, slot.y + slotHeight/2);
-                        }
+                        ctx.fillStyle = '#d4af37';
+                        ctx.font = 'italic 10px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('SUMMONING SCROLL...', slot.x + slotWidth/2, slot.y + slotHeight/2);
                     }
 
-                    // Checkbox Ownership Indicator (Top Left)
+                    // Checkbox Indicator
                     ctx.save();
                     const checkX = slot.x + 24;
                     const checkY = slot.y + 24;
@@ -1230,8 +1304,9 @@
                     }
                     ctx.restore();
 
-                    // Info Button Indicator (Top Right) - Disable for placeholders
-                    if (!card.isPlaceholder) {
+                    // Info Button
+                    const isUnrevealed = cardImgObj.loaded && cardImgObj.error;
+                    if (!isUnrevealed) {
                         ctx.save();
                         const infoX = slot.x + slotWidth - 24;
                         const infoY = slot.y + 24;
@@ -1272,7 +1347,6 @@
                     ctx.fillText(`${setCodeText} #${card.num} • ${card.rarity}`, slot.x + slotWidth/2, slot.y + slotHeight + 32);
 
                 } else {
-                    // Empty grid pocket design
                     ctx.strokeStyle = 'rgba(255,255,255,0.02)';
                     ctx.lineWidth = 2;
                     ctx.setLineDash([8, 8]);
@@ -1288,8 +1362,6 @@
             });
         }
 
-        // STREAMING_CHUNK: Coding visual card effects and light foil shaders...
-        // Foil shimmers & light physics calculations
         function applyFoilShader(ctx, slot, card, slotWidth, slotHeight) {
             ctx.save();
             ctx.beginPath();
@@ -1300,7 +1372,6 @@
             const deltaY = hoverCardIndex !== -1 ? (mouseY - (slot.y + slotHeight/2)) / (slotHeight/2) : 0;
 
             if (activeSection === 'poster') {
-                // TRADITIONAL FOIL: Highly pronounced diagonal rainbow sheen
                 ctx.save();
                 ctx.globalCompositeOperation = 'color-dodge';
                 ctx.globalAlpha = 0.38;
@@ -1328,7 +1399,6 @@
                 ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
                 ctx.restore();
 
-                // Add a secondary bright metallic gloss highlight sweep
                 ctx.save();
                 ctx.globalCompositeOperation = 'overlay';
                 ctx.globalAlpha = 0.35;
@@ -1345,7 +1415,6 @@
                 ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
                 ctx.restore();
 
-                // High intensity specular hot spot responsive to mouse
                 if (hoverCardIndex !== -1) {
                     ctx.save();
                     ctx.globalCompositeOperation = 'color-dodge';
@@ -1360,11 +1429,9 @@
                     ctx.restore();
                 }
 
-                // Render Sparkling Star Glints
                 drawFoilSparkles(ctx, slot, card.id || 101, slotWidth, slotHeight);
 
             } else if (activeSection === 'realms' || activeSection === 'bookcover' || activeSection === 'dragon') {
-                // SURGE FOIL: Flowing concentric curved neon rivers
                 ctx.globalCompositeOperation = 'color-dodge';
 
                 const waveShift = (foilAnimOffset * 2.5);
@@ -1397,7 +1464,6 @@
                 ctx.fillStyle = surgeSheen;
                 ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
             } else {
-                // GRAILS FOIL: Premium Shifting Cosmic Liquid Holographic Foil
                 ctx.save();
                 ctx.globalCompositeOperation = 'color-dodge';
                 ctx.globalAlpha = 0.45;
@@ -1407,24 +1473,22 @@
                     slot.x + cosmicOffset - slotWidth, slot.y + slotHeight / 2, 50,
                     slot.x + cosmicOffset - slotWidth, slot.y + slotHeight / 2, slotWidth * 1.5
                 );
-                cosmicGrad.addColorStop(0, 'rgba(255, 215, 0, 0.6)');    // Golden Core
-                cosmicGrad.addColorStop(0.25, 'rgba(238, 130, 238, 0.5)'); // Shifting Violet
-                cosmicGrad.addColorStop(0.5, 'rgba(0, 255, 255, 0.4)');   // Nebulous Cyan
-                cosmicGrad.addColorStop(0.75, 'rgba(123, 104, 238, 0.3)'); // Royal Indigo
+                cosmicGrad.addColorStop(0, 'rgba(255, 215, 0, 0.6)');
+                cosmicGrad.addColorStop(0.25, 'rgba(238, 130, 238, 0.5)');
+                cosmicGrad.addColorStop(0.5, 'rgba(0, 255, 255, 0.4)');
+                cosmicGrad.addColorStop(0.75, 'rgba(123, 104, 238, 0.3)');
                 cosmicGrad.addColorStop(1, 'rgba(0,0,0,0)');
 
                 ctx.fillStyle = cosmicGrad;
                 ctx.fillRect(slot.x, slot.y, slotWidth, slotHeight);
                 ctx.restore();
 
-                // Add magical cosmic twinkle points
                 drawCosmicSparkles(ctx, slot, card.num, slotWidth, slotHeight);
             }
 
             ctx.restore();
         }
 
-        // Twinkling foil sparkles (glints) for owned premium cards
         function drawFoilSparkles(ctx, slot, cardId, slotWidth, slotHeight) {
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
@@ -1451,7 +1515,6 @@
             ctx.restore();
         }
 
-        // Cosmic glittering galaxy stars for Custom Grails
         function drawCosmicSparkles(ctx, slot, cardNum, slotWidth, slotHeight) {
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
@@ -1464,7 +1527,6 @@
                 const wave = (Date.now() / 180 + i * 1.5) % (Math.PI * 2);
                 const radius = (Math.sin(wave) + 1) * 3 + 1;
 
-                // Color shifting sparkles
                 const hue = (Date.now() / 20 + i * 90) % 360;
                 ctx.fillStyle = `hsla(${hue}, 100%, 85%, 0.95)`;
 
@@ -1508,7 +1570,6 @@
             ctx.restore();
         }
 
-        // Main Animation Render Loop
         function animateLoop(timestamp) {
             if (!lastTime) lastTime = timestamp;
             const delta = timestamp - lastTime;
@@ -1527,10 +1588,7 @@
             requestAnimationFrame(animateLoop);
         }
 
-        // STREAMING_CHUNK: Coding gesture logic and click bindings...
-        // MOUSE AND TOUCH EVENTS INTERACTION HANDLERS
         function bindEvents() {
-
             canvas.addEventListener('mousemove', (e) => {
                 const pos = getMousePos(e);
                 mouseX = pos.x;
@@ -1568,7 +1626,6 @@
                 if (isCoverMode) {
                     isCoverMode = false;
                     document.getElementById('cover-toggle-text').innerText = "Close Binder";
-                    playPageTurnSound();
                     updatePaginationUI();
                     return;
                 }
@@ -1587,15 +1644,12 @@
                             const infoY = slot.y + 24;
                             const distToInfo = Math.hypot(pos.x - infoX, pos.y - infoY);
 
-                            if (distToInfo < 24 && !card.isPlaceholder) {
+                            const isUnrevealed = imagePool[`https://api.scryfall.com/cards/${card.set}/${card.num}?format=image&version=normal`]?.error;
+
+                            if (distToInfo < 24 && !isUnrevealed) {
                                 openCardDetailModal(card);
                             } else {
-                                const key = activeSection === 'grails' ? `grails-${card.set}-${card.num}` : `${activeSection}-${card.id}`;
-                                const newState = !collection[key];
-                                collection[key] = newState;
-
-                                playCardClickSound(newState);
-                                updateStats();
+                                handleCardOwnershipToggle(card);
                             }
                         }
                     }
@@ -1604,31 +1658,33 @@
 
             window.addEventListener('resize', resizeCanvas);
 
-            // Left & Right Arrow Navigation Actions
+            // Modal Action Handlers
+            document.getElementById('btn-victory-close').addEventListener('click', closeVictoryModal);
+            document.getElementById('victory-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('victory-modal')) closeVictoryModal();
+            });
+
+            document.getElementById('btn-break-cancel').addEventListener('click', closeBreakArchiveModal);
+            document.getElementById('btn-break-confirm').addEventListener('click', () => {
+                if (pendingCardToggle) {
+                    const action = pendingCardToggle;
+                    closeBreakArchiveModal();
+                    action();
+                }
+            });
+
             document.getElementById('floating-arrow-prev').addEventListener('click', prevPage);
             document.getElementById('floating-arrow-next').addEventListener('click', nextPage);
 
-            // Grid Switcher Layout toggle button action
             document.getElementById('btn-layout-toggle').addEventListener('click', toggleGridLayout);
+            document.getElementById('btn-mode-toggle').addEventListener('click', toggleViewMode);
 
-            // Set up main binding controls
-            document.getElementById('tab-poster').addEventListener('click', () => {
-                switchSection('poster');
-            });
-            document.getElementById('tab-realms').addEventListener('click', () => {
-                switchSection('realms');
-            });
-            document.getElementById('tab-bookcover').addEventListener('click', () => {
-                switchSection('bookcover');
-            });
-            document.getElementById('tab-dragon').addEventListener('click', () => {
-                switchSection('dragon');
-            });
-            document.getElementById('tab-grails').addEventListener('click', () => {
-                switchSection('grails');
-            });
+            document.getElementById('tab-poster').addEventListener('click', () => switchSection('poster'));
+            document.getElementById('tab-realms').addEventListener('click', () => switchSection('realms'));
+            document.getElementById('tab-bookcover').addEventListener('click', () => switchSection('bookcover'));
+            document.getElementById('tab-dragon').addEventListener('click', () => switchSection('dragon'));
+            document.getElementById('tab-grails').addEventListener('click', () => switchSection('grails'));
 
-            // Grail database searching events
             document.getElementById('btn-grail-search').addEventListener('click', handleGrailSearch);
             document.getElementById('grail-search-input').addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') handleGrailSearch();
@@ -1648,11 +1704,9 @@
             document.getElementById('btn-fill-all').addEventListener('click', checkAllCards);
             document.getElementById('btn-clear-all').addEventListener('click', clearBinder);
 
-            // Cover switch toggle
             document.getElementById('btn-cover-toggle').addEventListener('click', () => {
                 isCoverMode = !isCoverMode;
                 document.getElementById('cover-toggle-text').innerText = isCoverMode ? "Open Binder" : "Close Binder";
-                playPageTurnSound();
                 updatePaginationUI();
             });
 
@@ -1661,22 +1715,18 @@
                 if (e.target === document.getElementById('card-modal')) closeCardModal();
             });
 
-            // Bind Backup / Export modal UI events
             document.getElementById('btn-export-backup').addEventListener('click', openExportModal);
             document.getElementById('btn-backup-close').addEventListener('click', closeBackupModal);
             document.getElementById('btn-backup-copy').addEventListener('click', copyBackupText);
 
-            // Bind Import modal UI events
             document.getElementById('btn-import-backup').addEventListener('click', openImportModal);
             document.getElementById('btn-import-close').addEventListener('click', closeImportModal);
             document.getElementById('btn-import-confirm').addEventListener('click', confirmImportSave);
         }
 
-        // Responsive Binder Page Actions
         function prevPage() {
             if (currentPageIndex > 0) {
                 currentPageIndex--;
-                playPageTurnSound();
                 updatePaginationUI();
             }
         }
@@ -1685,26 +1735,48 @@
             const totalPages = getPages().length;
             if (currentPageIndex < totalPages - 1) {
                 currentPageIndex++;
-                playPageTurnSound();
                 updatePaginationUI();
             }
         }
 
-        // GRID LAYOUT TOGGLE: Smoothly swaps between 2x2 and 3x3 layout
+        function toggleViewMode() {
+            viewMode = viewMode === 'chase' ? 'archive' : 'chase';
+            const btnText = document.getElementById('mode-toggle-text');
+            const btnIcon = document.getElementById('mode-toggle-icon');
+            const modeBtn = document.getElementById('btn-mode-toggle');
+
+            if (viewMode === 'chase') {
+                btnText.innerText = 'Chase Mode';
+                btnIcon.innerText = '🎯';
+                modeBtn.className = "px-3 py-1.5 rounded-lg border border-amber-900/40 bg-amber-950/10 hover:bg-amber-900/30 transition-all flex items-center gap-2 text-sm text-amber-300";
+            } else {
+                btnText.innerText = 'Archive Mode';
+                btnIcon.innerText = '🏛️';
+                modeBtn.className = "px-3 py-1.5 rounded-lg border border-purple-900/40 bg-purple-950/20 hover:bg-purple-900/30 transition-all flex items-center gap-2 text-sm text-purple-300";
+            }
+
+            currentPageIndex = 0;
+            syncSectionVisibility();
+            updatePaginationUI();
+        }
+
         function toggleGridLayout() {
             layoutType = layoutType === '2x2' ? '3x3' : '2x2';
             document.getElementById('layout-toggle-text').innerText = `Grid: ${layoutType}`;
-            playPageTurnSound();
-            currentPageIndex = 0; // Reset to avoid page overflow
+            currentPageIndex = 0;
             updateStats();
             updatePaginationUI();
         }
 
-        // STREAMING_CHUNK: Coding section switching animations...
         function switchSection(sec) {
             activeSection = sec;
             currentPageIndex = 0;
 
+            updateTabStyles();
+            updatePaginationUI();
+        }
+
+        function updateTabStyles() {
             const posterBtn = document.getElementById('tab-poster');
             const realmsBtn = document.getElementById('tab-realms');
             const coverBtn = document.getElementById('tab-bookcover');
@@ -1715,44 +1787,50 @@
             const statusDot = document.getElementById('binder-status-dot');
             const searchWidget = document.getElementById('grails-search-widget');
 
-            // Default class templates
-            const activeClass = "px-1 py-2.5 rounded-xl border font-semibold text-[10px] tracking-wider transition-all shadow-md flex flex-col items-center justify-center gap-1 text-center";
-            const inactiveClass = "px-1 py-2.5 rounded-xl border border-gray-850 bg-gray-950/50 hover:bg-gray-800 text-gray-400 font-semibold text-[10px] tracking-wider transition-all flex flex-col items-center justify-center gap-1 text-center";
+            const baseClass = "px-1 py-2.5 rounded-xl border font-semibold text-[10px] tracking-wider transition-all flex flex-col items-center justify-center gap-1 text-center";
+            const activeStyle = "shadow-md";
+            const inactiveStyle = "border-gray-850 bg-gray-950/50 hover:bg-gray-800 text-gray-400";
 
-            // Reset all
-            posterBtn.className = inactiveClass;
-            realmsBtn.className = inactiveClass;
-            coverBtn.className = inactiveClass;
-            dragonBtn.className = inactiveClass;
-            grailsBtn.className = inactiveClass;
+            const applyStyle = (btn, isAct, activeExtra) => {
+                if (!btn) return;
+                btn.className = `${baseClass} ${isAct ? `${activeStyle} ${activeExtra}` : inactiveStyle}`;
+            };
 
-            searchWidget.classList.add('hidden');
+            applyStyle(posterBtn, activeSection === 'poster', "border-amber-500/30 bg-amber-950/20 text-amber-300");
+            applyStyle(realmsBtn, activeSection === 'realms', "border-cyan-500/30 bg-cyan-950/20 text-cyan-300");
+            applyStyle(coverBtn, activeSection === 'bookcover', "border-emerald-500/30 bg-emerald-950/20 text-emerald-300");
+            applyStyle(dragonBtn, activeSection === 'dragon', "border-orange-500/30 bg-orange-950/20 text-orange-300");
+            applyStyle(grailsBtn, activeSection === 'grails', "border-purple-500/40 bg-purple-950/20 text-purple-300 col-span-2 sm:col-span-1");
 
-            if (sec === 'poster') {
-                posterBtn.className = `${activeClass} border-amber-500/30 bg-amber-950/20 text-amber-300`;
-                label.innerText = "Poster Art (Traditional Foil)";
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse";
-            } else if (sec === 'realms') {
-                realmsBtn.className = `${activeClass} border-cyan-500/30 bg-cyan-950/20 text-cyan-300`;
-                label.innerText = "Ring Showcase (Surge Foil)";
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse";
-            } else if (sec === 'bookcover') {
-                coverBtn.className = `${activeClass} border-emerald-500/30 bg-emerald-950/20 text-emerald-300`;
-                label.innerText = "The Hobbit Book Cover (Surge Foil)";
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
-            } else if (sec === 'dragon') {
-                dragonBtn.className = `${activeClass} border-orange-500/30 bg-orange-950/20 text-orange-300`;
-                label.innerText = "The Hobbit Dragon Hoard (Surge Foil)";
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse";
-            } else {
-                grailsBtn.className = `${activeClass} border-purple-500/40 bg-purple-950/20 text-purple-300 col-span-2 sm:col-span-1`;
-                label.innerText = "Vault Grails (Cosmic Holographic)";
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse";
-                searchWidget.classList.remove('hidden');
+            if (searchWidget) {
+                if (activeSection === 'grails') {
+                    searchWidget.classList.remove('hidden');
+                } else {
+                    searchWidget.classList.add('hidden');
+                }
             }
 
-            playPageTurnSound();
-            updatePaginationUI();
+            if (label && statusDot) {
+                if (activeSection === 'poster') {
+                    label.innerText = "Poster Art (Traditional Foil)";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse";
+                } else if (activeSection === 'realms') {
+                    label.innerText = "Ring Showcase (Surge Foil)";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse";
+                } else if (activeSection === 'bookcover') {
+                    label.innerText = "The Hobbit Book Cover (Surge Foil)";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+                } else if (activeSection === 'dragon') {
+                    label.innerText = "The Hobbit Dragon Hoard (Surge Foil)";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse";
+                } else if (activeSection === 'grails') {
+                    label.innerText = "Vault Grails (Cosmic Holographic)";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse";
+                } else {
+                    label.innerText = viewMode === 'chase' ? "All Chase Collections Complete" : "No Archived Collections";
+                    statusDot.className = "w-2.5 h-2.5 rounded-full bg-gray-500";
+                }
+            }
         }
 
         function setFilter(filt) {
@@ -1770,8 +1848,6 @@
             updatePaginationUI();
         }
 
-        // STREAMING_CHUNK: Coding dynamic pagination tabs below cards...
-        // GENERATING THE DYNAMIC INTERACTIVE PAGINATION CONTROLS
         function updatePaginationUI() {
             const pages = getPages();
             const total = Math.max(1, pages.length);
@@ -1783,11 +1859,10 @@
             document.getElementById('txt-page-num').innerText = currentPageIndex + 1;
             document.getElementById('txt-total-pages').innerText = total;
 
-            // Sync Floating Arrows visibility & states
             const prevArrow = document.getElementById('floating-arrow-prev');
             const nextArrow = document.getElementById('floating-arrow-next');
 
-            if (isCoverMode) {
+            if (isCoverMode || !activeSection) {
                 prevArrow.disabled = true;
                 nextArrow.disabled = true;
                 prevArrow.style.display = 'none';
@@ -1799,7 +1874,6 @@
                 nextArrow.disabled = currentPageIndex === total - 1;
             }
 
-            // Redraw dynamic Pagination panel below cards
             const pagPanel = document.getElementById('pagination-controls');
             pagPanel.innerHTML = '';
 
@@ -1808,19 +1882,21 @@
                 return;
             }
 
-            // 1. Go to First Page button
+            if (!activeSection) {
+                pagPanel.innerHTML = `<span class="text-xs text-purple-400/80 italic tracking-wider fantasy-title">${viewMode === 'chase' ? 'All active collections complete!' : 'No archived collections yet'}</span>`;
+                return;
+            }
+
             const btnFirst = document.createElement('button');
             btnFirst.className = "px-2 py-1 text-xs rounded border border-gray-800 bg-gray-900/60 hover:bg-gray-800 text-gray-400 hover:text-amber-400 disabled:opacity-20 transition-all font-semibold";
             btnFirst.innerHTML = "≪ First";
             btnFirst.disabled = currentPageIndex === 0;
             btnFirst.addEventListener('click', () => {
                 currentPageIndex = 0;
-                playPageTurnSound();
                 updatePaginationUI();
             });
             pagPanel.appendChild(btnFirst);
 
-            // 2. Dynamic individual page number tabs
             const maxVisiblePages = 5;
             let startPage = Math.max(0, currentPageIndex - Math.floor(maxVisiblePages / 2));
             let endPage = Math.min(total, startPage + maxVisiblePages);
@@ -1846,7 +1922,6 @@
                 btnNum.innerText = p + 1;
                 btnNum.addEventListener('click', () => {
                     currentPageIndex = p;
-                    playPageTurnSound();
                     updatePaginationUI();
                 });
                 pagPanel.appendChild(btnNum);
@@ -1859,20 +1934,17 @@
                 pagPanel.appendChild(ellipsis);
             }
 
-            // 3. Go to Last Page button
             const btnLast = document.createElement('button');
             btnLast.className = "px-2 py-1 text-xs rounded border border-gray-800 bg-gray-900/60 hover:bg-gray-800 text-gray-400 hover:text-amber-400 disabled:opacity-20 transition-all font-semibold";
             btnLast.innerHTML = "Last ≫";
             btnLast.disabled = currentPageIndex === total - 1;
             btnLast.addEventListener('click', () => {
                 currentPageIndex = total - 1;
-                playPageTurnSound();
                 updatePaginationUI();
             });
             pagPanel.appendChild(btnLast);
         }
 
-        // Scryfall Card Search Process for Vault Grails
         async function handleGrailSearch() {
             const input = document.getElementById('grail-search-input');
             const query = input.value.trim();
@@ -1891,21 +1963,16 @@
             addBtn.disabled = true;
 
             try {
-                // Fetch cards with prints unique to matching card names
                 const url = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(query)}&unique=prints`;
                 const response = await fetch(url);
 
-                if (!response.ok) {
-                    throw new Error("No printings found.");
-                }
+                if (!response.ok) throw new Error("No printings found.");
 
                 const data = await response.json();
-                if (!data.data || data.data.length === 0) {
-                    throw new Error("No cards resolved.");
-                }
+                if (!data.data || data.data.length === 0) throw new Error("No cards resolved.");
 
                 currentSearchCards = data.data;
-                const prints = data.data.slice(0, 100); // Limit dropdown listings for browser capability
+                const prints = data.data.slice(0, 100);
 
                 select.innerHTML = '';
                 prints.forEach((card, index) => {
@@ -1934,7 +2001,6 @@
             }
         }
 
-        // Add selected searched print to the binder list
         function handleAddGrail() {
             const select = document.getElementById('grail-print-select');
             const selectedIndex = select.value;
@@ -1943,7 +2009,6 @@
             const cardData = currentSearchCards[selectedIndex];
             if (!cardData) return;
 
-            // Prevent adding duplication of identical printings
             const exists = grailsCollection.some(c => c.set === cardData.set && c.num === cardData.collector_number);
             if (exists) {
                 const statusMsg = document.getElementById('grail-search-status');
@@ -1953,7 +2018,7 @@
             }
 
             const newGrailCard = {
-                id: Date.now() + Math.floor(Math.random() * 1000), // unique internal identifier
+                id: Date.now() + Math.floor(Math.random() * 1000),
                 name: cardData.name,
                 set: cardData.set,
                 num: cardData.collector_number,
@@ -1961,11 +2026,8 @@
             };
 
             grailsCollection.push(newGrailCard);
-
-            // Auto mark newly added custom card as owned for immediately satisfying insertion
             collection[`grails-${newGrailCard.set}-${newGrailCard.num}`] = true;
 
-            // Reset search interface
             document.getElementById('grail-search-input').value = '';
             select.innerHTML = '<option value="">-- No printings loaded --</option>';
             select.disabled = true;
@@ -1975,22 +2037,17 @@
             statusMsg.innerText = `✅ Loaded ${cardData.name} into your custom Vault Grails page!`;
             statusMsg.className = "text-xs text-emerald-400 font-bold";
 
-            playCardClickSound(true);
             updateStats();
             updatePaginationUI();
         }
 
-        // Remove dynamic Grail from the deck completely
         function deleteGrailCard(card) {
             grailsCollection = grailsCollection.filter(c => !(c.set === card.set && c.num === card.num));
-
-            // Clean up corresponding ownership key
             delete collection[`grails-${card.set}-${card.num}`];
 
             updateStats();
             updatePaginationUI();
             closeCardModal();
-            playCardClickSound(false);
         }
 
         function checkAllCards() {
@@ -1999,7 +2056,6 @@
                 const key = activeSection === 'grails' ? `grails-${c.set}-${c.num}` : `${activeSection}-${c.id}`;
                 collection[key] = true;
             });
-            playCardClickSound(true);
             updateStats();
         }
 
@@ -2009,7 +2065,6 @@
 
             if (originalText === "Confirm Reset?") {
                 collection = {};
-                playCardClickSound(false);
                 updateStats();
                 proceed.innerText = "Reset Binder";
                 proceed.className = "text-xs font-medium py-2 rounded-lg bg-rose-950/20 border border-rose-900/50 text-rose-400 hover:bg-rose-900/30 transition-all";
@@ -2025,13 +2080,12 @@
 
         function resizeCanvas() {
             const parent = canvas.parentElement;
+            if (!parent) return;
             const w = parent.clientWidth;
             canvas.style.width = w + 'px';
             canvas.style.height = (w * (V_HEIGHT / V_WIDTH)) + 'px';
         }
 
-        // STREAMING_CHUNK: Activating detailed card inspect modals...
-        // SCRYFALL API INTEGRATED DETAILED CARD VIEW MODAL
         async function openCardDetailModal(card) {
             const modal = document.getElementById('card-modal');
             const container = document.getElementById('modal-container');
@@ -2120,9 +2174,7 @@
             modal.classList.remove('opacity-100');
             container.classList.remove('scale-100');
             container.classList.add('scale-90');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
         function syncModalToggleButton(card) {
@@ -2139,16 +2191,11 @@
             }
 
             btn.onclick = () => {
-                const newState = !collection[key];
-                collection[key] = newState;
-
-                playCardClickSound(newState);
-                updateStats();
-                syncModalToggleButton(card);
+                closeCardModal();
+                handleCardOwnershipToggle(card);
             };
         }
 
-        // Backup & Restore Functions
         function openExportModal() {
             const modal = document.getElementById('backup-modal');
             const textArea = document.getElementById('backup-text-area');
@@ -2158,12 +2205,7 @@
             notification.classList.add('hidden');
             notification.innerText = "";
 
-            // Encode the collection data along with the custom grails roster
-            const completeState = {
-                collection: collection,
-                grails: grailsCollection
-            };
-
+            const completeState = { collection: collection, grails: grailsCollection };
             const jsonStr = JSON.stringify(completeState);
             const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
 
@@ -2181,14 +2223,11 @@
             const textArea = document.getElementById('backup-text-area');
             const notification = document.getElementById('backup-notification');
             textArea.select();
-            textArea.setSelectionRange(0, 99999); // For mobile devices
+            textArea.setSelectionRange(0, 99999);
 
             try {
-                // Clipboard fallback helper for sandbox iframe environments
                 document.execCommand('copy');
                 document.getElementById('btn-backup-copy').innerText = "✓ Copied!";
-
-                // Show clean in-app status notification instead of alert()
                 notification.className = "mt-2 text-xs font-semibold text-center text-emerald-400";
                 notification.innerText = "✓ Backup code successfully copied to clipboard!";
                 notification.classList.remove('hidden');
@@ -2211,9 +2250,7 @@
 
         function confirmImportSave() {
             const code = document.getElementById('import-text-area').value.trim();
-            if (!code) {
-                return;
-            }
+            if (!code) return;
 
             try {
                 const decodedJson = decodeURIComponent(escape(atob(code)));
@@ -2224,12 +2261,10 @@
                         collection = parsed.collection;
                         grailsCollection = parsed.grails;
                     } else {
-                        // Compatibility check for older save codes
                         collection = parsed;
                     }
                     updateStats();
                     closeImportModal();
-                    playCardClickSound(true);
                 } else {
                     throw new Error("Invalid format");
                 }
@@ -2237,13 +2272,10 @@
                 const importArea = document.getElementById('import-text-area');
                 importArea.value = "⚠️ INVALID BACKUP CODE! Please check your string and paste it again.";
                 importArea.style.borderColor = "#e11d48";
-                setTimeout(() => {
-                    importArea.style.borderColor = "";
-                }, 2000);
+                setTimeout(() => { importArea.style.borderColor = ""; }, 2000);
             }
         }
 
-        // Kick off window loading
         window.onload = initApp;
 
     </script>
